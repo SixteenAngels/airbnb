@@ -3,14 +3,17 @@ import { NavigationContainer, DefaultTheme, Theme } from '@react-navigation/nati
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { StyleSheet } from 'react-native';
 import AppNavigator from './src/navigation/AppNavigator';
+import { FavoritesProvider } from './src/contexts/FavoritesContext';
 
 export default function App() {
   return (
     <SafeAreaProvider>
-      <NavigationContainer theme={navTheme}>
-        <StatusBar style="auto" />
-        <AppNavigator />
-      </NavigationContainer>
+      <FavoritesProvider>
+        <NavigationContainer theme={navTheme}>
+          <StatusBar style="auto" />
+          <AppNavigator />
+        </NavigationContainer>
+      </FavoritesProvider>
     </SafeAreaProvider>
   );
 }
