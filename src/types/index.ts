@@ -12,5 +12,7 @@ export type Property = {
 export type RootStackParamList = {
   Home: undefined;
   PropertyDetail: { property: Property };
+  Login: undefined;
+  Signup: undefined;
 };
 
