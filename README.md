@@ -247,7 +247,7 @@ expo build:ios
 
 ### Android
 ```bash
-expo build:android
+npx eas build -p android --profile production
 ```
 
 ## Contributing
@@ -277,4 +277,4 @@ For support and questions:
 - Property search and browsing
 - Chat system
 - Map integration
-- Theme support "# airbnb" 
+- Theme support 
