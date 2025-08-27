@@ -45,6 +45,7 @@ export default function LoginScreen({ navigation }: Props) {
         {loading ? <ActivityIndicator color="#fff" /> : <Text style={styles.buttonText}>Sign In</Text>}
       </TouchableOpacity>
       <Text style={styles.link} onPress={() => navigation.replace('Signup')}>Don't have an account? Sign up</Text>
+      <Text style={styles.link} onPress={() => navigation.navigate('ResetPassword')}>Forgot password?</Text>
     </View>
   );
 }

@@ -4,6 +4,7 @@ import PropertyListScreen from '../screens/PropertyListScreen';
 import PropertyDetailScreen from '../screens/PropertyDetailScreen';
 import LoginScreen from '../screens/LoginScreen';
 import SignupScreen from '../screens/SignupScreen';
+import ResetPasswordScreen from '../screens/ResetPasswordScreen';
 import { RootStackParamList } from '../types';
 import { useAuth } from '../contexts/AuthContext';
 import { TouchableOpacity, Text } from 'react-native';
@@ -32,6 +33,7 @@ export default function AppNavigator() {
     <Stack.Navigator initialRouteName="Login">
       <Stack.Screen name="Login" component={LoginScreen} options={{ title: 'Sign In' }} />
       <Stack.Screen name="Signup" component={SignupScreen} options={{ title: 'Sign Up' }} />
+      <Stack.Screen name="ResetPassword" component={ResetPasswordScreen} options={{ title: 'Reset Password' }} />
     </Stack.Navigator>
   );
 }

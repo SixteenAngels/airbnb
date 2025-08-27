@@ -14,5 +14,6 @@ export type RootStackParamList = {
   PropertyDetail: { property: Property };
   Login: undefined;
   Signup: undefined;
+  ResetPassword: undefined;
 };
 
