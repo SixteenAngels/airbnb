@@ -1,20 +1,40 @@
 import React from 'react';
-import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, StyleSheet, RefreshControl } from 'react-native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { mockProperties } from '../data/mockProperties';
 import { RootStackParamList, Property } from '../types';
+import SearchBar from '../components/SearchBar';
+import { fetchProperties } from '../services/properties';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
 export default function PropertyListScreen({ navigation }: Props) {
+  const [query, setQuery] = React.useState('');
+  const [loading, setLoading] = React.useState(false);
+  const [properties, setProperties] = React.useState<Property[]>([]);
+
   const handlePress = (property: Property) => {
     navigation.navigate('PropertyDetail', { property });
   };
 
+  const load = React.useCallback(async () => {
+    setLoading(true);
+    try {
+      const data = await fetchProperties({ query });
+      setProperties(data);
+    } finally {
+      setLoading(false);
+    }
+  }, [query]);
+
+  React.useEffect(() => {
+    load();
+  }, [load]);
+
   return (
     <View style={styles.container}>
+      <SearchBar query={query} onChangeQuery={setQuery} />
       <FlatList
-        data={mockProperties}
+        data={properties}
         keyExtractor={(item) => item.id}
         ItemSeparatorComponent={() => <View style={styles.separator} />}
         renderItem={({ item }) => (
@@ -27,7 +47,8 @@ export default function PropertyListScreen({ navigation }: Props) {
           </TouchableOpacity>
         )}
         ListEmptyComponent={<Text style={styles.empty}>No properties found.</Text>}
-        contentContainerStyle={mockProperties.length === 0 ? styles.emptyContainer : undefined}
+        contentContainerStyle={properties.length === 0 ? styles.emptyContainer : undefined}
+        refreshControl={<RefreshControl refreshing={loading} onRefresh={load} />}
       />
     </View>
   );
